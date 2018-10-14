@@ -4,12 +4,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from collections import Counter
 
+# Read datas
 median_house_hold_in_come = pd.read_csv('MedianHouseholdIncome2015.csv', encoding="windows-1252")
 percentage_people_below_poverty_level = pd.read_csv('PercentagePeopleBelowPovertyLevel.csv', encoding="windows-1252")
 percent_over_25_completed_highSchool = pd.read_csv('PercentOver25CompletedHighSchool.csv', encoding="windows-1252")
 share_race_city = pd.read_csv('ShareRaceByCity.csv', encoding="windows-1252")
 kill = pd.read_csv('PoliceKillingsUS.csv', encoding="windows-1252")
 
+# Poverty rate of each state
 percentage_people_below_poverty_level.poverty_rate.replace(['-'],0.0,inplace = True)
 percentage_people_below_poverty_level.poverty_rate = percentage_people_below_poverty_level.poverty_rate.astype(float)
 area_list = list(percentage_people_below_poverty_level['Geographic Area'].unique())
@@ -30,6 +32,7 @@ plt.xlabel('States')
 plt.ylabel('Poverty Rate')
 plt.title('Poverty Rate Given States')
 
+# Most common 15 Name or Surname of killed people
 separate = kill.name[kill.name != 'TK TK'].str.split() 
 a,b = zip(*separate)                    
 name_list = a+b                         
@@ -44,6 +47,7 @@ plt.xlabel('Name or Surname of killed people')
 plt.ylabel('Frequency')
 plt.title('Most common 15 Name or Surname of killed people')
 
+# High school graduation rate of the population that is older than 25 in states
 percent_over_25_completed_highSchool.percent_completed_hs.replace(['-'],0.0,inplace = True)
 percent_over_25_completed_highSchool.percent_completed_hs = percent_over_25_completed_highSchool.percent_completed_hs.astype(float)
 area_list = list(percent_over_25_completed_highSchool['Geographic Area'].unique())
